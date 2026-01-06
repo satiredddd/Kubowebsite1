@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, onSnapshot, query, orderBy, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db, auth } from '../../firebase';
 import { getDoc } from 'firebase/firestore';
-import './Users.css';
+import './users.css';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
