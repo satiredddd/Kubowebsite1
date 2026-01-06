@@ -1,0 +1,16 @@
+
+.main-content {
+  flex: 1;
+  padding: 32px;
+  transition: margin-left 0.3s ease;
+  overflow-x: hidden;
+  min-height: 100vh;
+  background: rgb(245, 245, 245);
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 80px;
+    padding: 20px;
+  }
+}
