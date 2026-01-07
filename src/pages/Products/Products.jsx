@@ -690,7 +690,7 @@ const Products = () => {
               </button>
             </div>
 
-            <div className="modal-body-scrollable">
+             <div className="modal-body-scrollable">
               <div className="form-grid">
                 <div className="form-group full-width">
                   <label>Product Image</label>
@@ -883,51 +883,7 @@ const Products = () => {
                 {uploadingImage ? 'Uploading...' : (editingProduct ? 'Update Product' : 'Post Product')}
               </button>
             </div>
-          </div>
-        </div>
-      )}
-
-      {showCategoryModal && (
-        <div className="modal-overlay">
-          <div className="modal category-modal">
-            <div className="modal-header">
-              <h2>Add New Category</h2>
-              <button onClick={() => setShowCategoryModal(false)} className="close-btn">
-                <X size={20} />
-              </button>
-            </div>
-
-            <div className="form-group">
-              <label>Category Name</label>
-              <input
-                type="text"
-                value={newCategoryName}
-                onChange={(e) => setNewCategoryName(e.target.value)}
-                placeholder="e.g., Desk, Lamp, Shelf"
-                className="form-input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Category Icon (Emoji)</label>
-              <input
-                type="text"
-                value={newCategoryIcon}
-                onChange={(e) => setNewCategoryIcon(e.target.value)}
-                placeholder="📦"
-                className="form-input"
-              />
-            </div>
-
-            <div className="modal-footer">
-              <button onClick={() => setShowCategoryModal(false)} className="btn btn-secondary">
-                Cancel
-              </button>
-              <button onClick={handleAddCategory} className="btn btn-category">
-                Add Category
-              </button>
-            </div>
-          </div>
+           </div>
         </div>
       )}
     </div>

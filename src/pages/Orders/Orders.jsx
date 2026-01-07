@@ -8,6 +8,7 @@ const Orders = () => {
   const [loading, setLoading] = useState(true);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [filterStatus, setFilterStatus] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const ordersPerPage = 6;
 
@@ -189,15 +190,29 @@ const Orders = () => {
     ? orders 
     : orders.filter(order => order.status === filterStatus);
 
+  // Apply search filter
+  const searchedOrders = filteredOrders.filter(order => {
+    if (!searchQuery.trim()) return true;
+    
+    const query = searchQuery.toLowerCase();
+    const orderId = order.id.toLowerCase();
+    const email = order.userEmail?.toLowerCase() || '';
+    const address = order.deliveryAddress?.toLowerCase() || '';
+    
+    return orderId.includes(query) || 
+           email.includes(query) || 
+           address.includes(query);
+  });
+
   // Pagination
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
-  const currentOrders = filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder);
-  const totalPages = Math.ceil(filteredOrders.length / ordersPerPage);
+  const currentOrders = searchedOrders.slice(indexOfFirstOrder, indexOfLastOrder);
+  const totalPages = Math.ceil(searchedOrders.length / ordersPerPage);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [filterStatus]);
+  }, [filterStatus, searchQuery]);
 
   if (loading) {
     return (
@@ -211,6 +226,17 @@ const Orders = () => {
     <div className="page-container">
       <div className="orders-header">
         <h1 className="page-title">Order Management</h1>
+        
+        <div className="search-bar">
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Search by order ID, email, or address..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+
         <div className="filter-buttons">
           <button 
             className={filterStatus === 'all' ? 'filter-btn active' : 'filter-btn'}
@@ -316,7 +342,7 @@ const Orders = () => {
             Previous
           </button>
           <div className="pagination-info">
-            Page {currentPage} of {totalPages} ({filteredOrders.length} orders)
+            Page {currentPage} of {totalPages} ({searchedOrders.length} orders)
           </div>
           <button
             className="pagination-btn"
