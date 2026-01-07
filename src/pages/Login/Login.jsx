@@ -128,11 +128,6 @@ export const Login = () => {
                                 />
                             </div>
                         </div>
-
-                        <div className="forgot-password">
-                            Forgot Password? <span>Click Here!</span>
-                        </div>
-
                         <div className="submit-container">
                             <button type="submit" className="submit" disabled={loading}>
                                 {loading ? 'LOGGING IN...' : 'L O G I N'}
